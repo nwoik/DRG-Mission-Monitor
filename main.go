@@ -4,12 +4,14 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+
+	"github.com/nwoik/DRG-Mission-Monitor/api"
 )
 
 func main() {
 
-	http.HandleFunc("/sub2nwoik", MainHandler)
-
+	http.HandleFunc("/index", MainHandler)
+	http.HandleFunc("/drg", api.RequestHandler)
 	// Assuming there is a server.crt and server.key file existing in the local directory, run TLS server
 	log.Print("Running server on port 8080")
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
