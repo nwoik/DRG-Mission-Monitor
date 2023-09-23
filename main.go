@@ -11,7 +11,8 @@ import (
 func main() {
 
 	http.HandleFunc("/index", MainHandler)
-	http.HandleFunc("/drg", api.RequestHandler)
+	http.HandleFunc("/dd", api.DDRequestHandler)
+	http.HandleFunc("/mission", api.MissionsRequestHandler)
 	// Assuming there is a server.crt and server.key file existing in the local directory, run TLS server
 	log.Print("Running server on port 8080")
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
