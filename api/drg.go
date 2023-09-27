@@ -11,12 +11,16 @@ type MissonsResponse struct {
 }
 
 type Biomes struct {
+	AzureWorld               []Stage `json:"Azure World"`
 	CrystallineCaverns       []Stage `json:"Crystalline Caverns"`
 	DenseBiozone             []Stage `json:"Dense Biozone"`
-	FungosBogs               []Stage `json:"Fungos Bogs"`
+	FungusBogs               []Stage `json:"Fungus Bogs"`
+	GlacialStrata            []Stage `json:"Glacial Strata"`
+	HollowBough              []Stage `json:"Hollow Bough"`
 	MagmaCore                []Stage `json:"Magma Core"`
 	RadioactiveExclusionZone []Stage `json:"Radioactive Exclusion Zone"`
 	SaltPits                 []Stage `json:"Salt Pits"`
+	SandblastedCorridors     []Stage `json:"Sandblasted Corridors"`
 }
 
 type DeepDiveResponse struct {
