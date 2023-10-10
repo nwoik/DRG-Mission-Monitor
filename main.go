@@ -14,8 +14,8 @@ func main() {
 	http.HandleFunc("/deepdives", api.DDRequestHandler)
 	http.HandleFunc("/missions", api.MissionsRequestHandler)
 
-	log.Print("Running server on port 8080")
-	log.Fatal(http.ListenAndServe("localhost:8080", nil))
+	log.Print("Running server on port 3000")
+	log.Fatal(http.ListenAndServe("localhost:3000", nil))
 }
 
 // Handles main page of server
