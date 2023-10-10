@@ -11,16 +11,16 @@ type MissonsResponse struct {
 }
 
 type Biomes struct {
-	AzureWorld               []Stage `json:"Azure World"`
-	CrystallineCaverns       []Stage `json:"Crystalline Caverns"`
-	DenseBiozone             []Stage `json:"Dense Biozone"`
-	FungusBogs               []Stage `json:"Fungus Bogs"`
-	GlacialStrata            []Stage `json:"Glacial Strata"`
-	HollowBough              []Stage `json:"Hollow Bough"`
-	MagmaCore                []Stage `json:"Magma Core"`
-	RadioactiveExclusionZone []Stage `json:"Radioactive Exclusion Zone"`
-	SaltPits                 []Stage `json:"Salt Pits"`
-	SandblastedCorridors     []Stage `json:"Sandblasted Corridors"`
+	AzureWorld               *[]Stage `json:"Azure World,omitempty"`
+	CrystallineCaverns       *[]Stage `json:"Crystalline Caverns,omitempty"`
+	DenseBiozone             *[]Stage `json:"Dense Biozone,omitempty"`
+	FungusBogs               *[]Stage `json:"Fungus Bogs,omitempty"`
+	GlacialStrata            *[]Stage `json:"Glacial Strata,omitempty"`
+	HollowBough              *[]Stage `json:"Hollow Bough,omitempty"`
+	MagmaCore                *[]Stage `json:"Magma Core,omitempty"`
+	RadioactiveExclusionZone *[]Stage `json:"Radioactive Exclusion Zone,omitempty"`
+	SaltPits                 *[]Stage `json:"Salt Pits,omitempty"`
+	SandblastedCorridors     *[]Stage `json:"Sandblasted Corridors,omitempty"`
 }
 
 type DeepDiveResponse struct {
@@ -39,26 +39,26 @@ type DeepDive struct {
 }
 
 type Stage struct {
-	CodeName           string   `json:"CodeName"`
-	Complexity         string   `json:"Complexity"`
-	Length             string   `json:"Length"`
-	ID                 int      `json:"id"`
-	PrimaryObjective   string   `json:"PrimaryObjective"`
-	SecondaryObjective string   `json:"SecondaryObjective"`
-	MissionMutator     string   `json:"MissionMutator"`
-	MissionWarnings    []string `json:"MissionWarnings"`
+	CodeName           string    `json:"CodeName"`
+	Complexity         string    `json:"Complexity"`
+	Length             string    `json:"Length"`
+	ID                 int       `json:"id"`
+	PrimaryObjective   string    `json:"PrimaryObjective"`
+	SecondaryObjective string    `json:"SecondaryObjective"`
+	MissionMutator     *string   `json:"MissionMutator,omitempty"`
+	MissionWarnings    *[]string `json:"MissionWarnings,omitempty"`
 }
 
 func DDRequestHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Handling rq")
 	request, err := http.NewRequest("GET", "https://doublexp.net/json?data=DD", nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 
 	// var body interface{}
@@ -82,7 +82,7 @@ func MissionsRequestHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Handling rq")
 	request, err := http.NewRequest("GET", "https://doublexp.net/json?data=current", nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 
 	response, err := http.DefaultClient.Do(request)
@@ -96,7 +96,13 @@ func MissionsRequestHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewDecoder(response.Body).Decode(&properBody)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	log.Println(properBody)
+
+	resp, err := json.Marshal(&properBody)
+	if err != nil {
+		log.Print(err)
+	}
+	w.Write(resp)
 }
