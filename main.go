@@ -10,9 +10,9 @@ import (
 
 func main() {
 
-	http.HandleFunc("/index", MainHandler)
-	http.HandleFunc("/dd", api.DDRequestHandler)
-	http.HandleFunc("/mission", api.MissionsRequestHandler)
+	http.HandleFunc("/", MainHandler)
+	http.HandleFunc("/deepdives", api.DDRequestHandler)
+	http.HandleFunc("/missions", api.MissionsRequestHandler)
 
 	log.Print("Running server on port 8080")
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
