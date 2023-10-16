@@ -39,12 +39,12 @@ type DeepDive struct {
 }
 
 type Stage struct {
+	PrimaryObjective   string    `json:"PrimaryObjective"`
+	SecondaryObjective string    `json:"SecondaryObjective"`
 	CodeName           string    `json:"CodeName"`
 	Complexity         string    `json:"Complexity"`
 	Length             string    `json:"Length"`
 	ID                 int       `json:"id"`
-	PrimaryObjective   string    `json:"PrimaryObjective"`
-	SecondaryObjective string    `json:"SecondaryObjective"`
 	MissionMutator     *string   `json:"MissionMutator,omitempty"`
 	MissionWarnings    *[]string `json:"MissionWarnings,omitempty"`
 }
