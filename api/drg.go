@@ -79,6 +79,8 @@ func DDRequestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func MissionsRequestHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
+
 	log.Println("Handling rq")
 	request, err := http.NewRequest("GET", "https://doublexp.net/json?data=current", nil)
 	if err != nil {
@@ -104,5 +106,14 @@ func MissionsRequestHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print(err)
 	}
+
 	w.Write(resp)
+	log.Print("response written")
+}
+
+func EnableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Push-Key, Push-Token")
+	(*w).Header().Set("Content-Type", "Application/json")
 }
