@@ -61,14 +61,6 @@ func DDRequestHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	// var body interface{}
-
-	// err = json.NewDecoder(response.Body).Decode(&body)
-	// if err != nil {
-	// 	log.Print(err)
-	// }
-	// log.Println(body)
-
 	var properBody DeepDiveResponse
 
 	err = json.NewDecoder(response.Body).Decode(&properBody)
@@ -76,6 +68,14 @@ func DDRequestHandler(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 	log.Println(properBody)
+
+	resp, err := json.Marshal(&properBody)
+	if err != nil {
+		log.Print(err)
+	}
+
+	w.Write(resp)
+	log.Print("response written")
 }
 
 func MissionsRequestHandler(w http.ResponseWriter, r *http.Request) {
