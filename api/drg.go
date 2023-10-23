@@ -50,6 +50,8 @@ type Stage struct {
 }
 
 func DDRequestHandler(w http.ResponseWriter, r *http.Request) {
+	EnableCors(&w)
+
 	log.Println("Handling rq")
 	request, err := http.NewRequest("GET", "https://doublexp.net/json?data=DD", nil)
 	if err != nil {
